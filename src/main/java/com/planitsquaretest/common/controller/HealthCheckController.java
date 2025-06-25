@@ -1,14 +1,14 @@
 package com.planitsquaretest.common.controller;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.planitsquaretest.api.HealthApi;
+import com.planitsquaretest.model.HealthResponse;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HealthCheckController {
+public class HealthCheckController implements HealthApi {
 
-    @GetMapping("/health")
-    public ResponseEntity<?> healthCheck() {
-        return ResponseEntity.ok("OK");
+    @Override
+    public HealthResponse healthCheck() {
+        return new HealthResponse().status("OK");
     }
 }
