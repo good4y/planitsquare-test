@@ -1,4 +1,4 @@
-package com.planitsquaretest.config;
+package com.planitsquaretest.common.config;
 
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +18,14 @@ public class ApiPrefixConfig implements WebMvcRegistrations {
 
             @Override
             protected void registerHandlerMethod(Object handler, Method method, RequestMappingInfo mapping) {
+                Class<?> beanType = method.getDeclaringClass();
+
+                String packageName = beanType.getPackageName();
+                if (packageName.startsWith("org.springdoc")) {
+                    super.registerHandlerMethod(handler, method, mapping);
+                    return;
+                }
+
                 RequestMappingInfo apiPrefixInfo = RequestMappingInfo
                         .paths(API_PREFIX_V1)
                         .build();
