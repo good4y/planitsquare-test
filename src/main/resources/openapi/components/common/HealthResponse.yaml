@@ -1,0 +1,5 @@
+type: object
+description: 헬스 체크 응답
+properties:
+  status:
+    type: string
