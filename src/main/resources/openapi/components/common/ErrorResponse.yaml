@@ -1,0 +1,9 @@
+type: object
+description: 에러 응답
+properties:
+  message:
+    type: string
+    description: 에러 메시지
+  timestamp:
+    type: string
+    description: 에러 발생 시각

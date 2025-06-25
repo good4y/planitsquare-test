@@ -1,0 +1,21 @@
+health:
+  get:
+    summary: 헬스 체크
+    operationId: healthCheck
+    tags:
+      - Health
+
+    responses:
+      '200':
+        description: 정상 응답
+        content:
+          application/json:
+            schema:
+              $ref: '../components/common/HealthResponse.yaml'
+
+      '500':
+        description: 에러
+        content:
+          application/json:
+            schema:
+              $ref: '../components/common/ErrorResponse.yaml'
