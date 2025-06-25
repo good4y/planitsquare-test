@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: planitSquare-test
+  jackson:
+    time-zone: Asia/Seoul
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui
