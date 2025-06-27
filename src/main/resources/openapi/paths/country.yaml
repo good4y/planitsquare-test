@@ -1,0 +1,22 @@
+country:
+  csv:
+    post:
+      summary: 국가 정보 csv를 이용한 등록
+      operationId: countryCsvRegister
+      tags:
+        - Country
+
+      responses:
+        '200':
+          description: 정상 응답
+          content:
+            application/json:
+              schema:
+                $ref: '../components/country/CountryCsvRegisterResponse.yaml'
+
+        '500':
+          description: 에러
+          content:
+            application/json:
+              schema:
+                $ref: '../components/common/ErrorResponse.yaml'

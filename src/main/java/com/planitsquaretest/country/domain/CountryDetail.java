@@ -2,10 +2,7 @@ package com.planitsquaretest.country.domain;
 
 import com.planitsquaretest.common.domain.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
 @Entity
@@ -16,7 +13,9 @@ public class CountryDetail extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id")
     private Country country;
 
     @Enumerated(EnumType.STRING)
@@ -27,9 +26,8 @@ public class CountryDetail extends BaseEntity {
     private String description;
 
     @Builder
-    private CountryDetail(String content, Country country, String description, CountryDetailType type) {
+    private CountryDetail(String content, String description, CountryDetailType type) {
         this.content = content;
-        this.country = country;
         this.description = description;
         this.type = type;
     }
