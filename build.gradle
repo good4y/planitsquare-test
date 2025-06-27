@@ -36,6 +36,8 @@ dependencies {
     implementation 'org.flywaydb:flyway-core:11.9.1'
     flywayMigration 'com.h2database:h2:2.3.232'
 
+    implementation 'com.opencsv:opencsv:5.11.2'
+
     jooqGenerator 'com.h2database:h2:2.3.232'
     jooqGenerator 'org.jooq:jooq:3.19.1'
     jooqGenerator 'org.jooq:jooq-meta:3.19.1'
