@@ -8,6 +8,8 @@ servers:
 paths:
   /health:
     $ref: './paths/health.yaml#/health'
+  /country/csv:
+    $ref: './paths/country.yaml#/country/csv'
 
 components:
   schemas:
@@ -15,3 +17,5 @@ components:
       $ref: './components/common/ErrorResponse.yaml'
     HealthResponse:
       $ref: './components/common/HealthResponse.yaml'
+    CountryCsvRegisterResponse:
+      $ref: './components/country/CountryCsvRegisterResponse.yaml'

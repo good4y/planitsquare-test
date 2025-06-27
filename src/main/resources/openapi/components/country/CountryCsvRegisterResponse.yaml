@@ -1,0 +1,7 @@
+type: object
+description: Csv를 이용한 저장 정보
+properties:
+  total:
+    type: integer
+  failed:
+    type: integer
