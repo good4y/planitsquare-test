@@ -21,6 +21,7 @@ public class Country extends BaseEntity {
 
     private String name;
 
+    @Column(unique = true)
     private String code;
 
     @OneToMany(mappedBy = "country", cascade = CascadeType.PERSIST, orphanRemoval = true)
