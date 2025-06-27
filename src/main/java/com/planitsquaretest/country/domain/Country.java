@@ -1,14 +1,14 @@
 package com.planitsquaretest.country.domain;
 
 import com.planitsquaretest.common.domain.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -23,9 +23,17 @@ public class Country extends BaseEntity {
 
     private String code;
 
+    @OneToMany(mappedBy = "country", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private final List<CountryDetail> countryDetailList = new ArrayList<>();
+
     @Builder
     private Country(String code, String name) {
         this.code = code;
         this.name = name;
+    }
+
+    public void addCountryDetail(CountryDetail detail) {
+        this.countryDetailList.add(detail);
+        detail.setCountry(this);
     }
 }
