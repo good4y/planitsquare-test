@@ -1,6 +1,7 @@
 package com.planitsquaretest.common.advice;
 
 import com.planitsquaretest.common.dto.CommonResponse;
+import com.planitsquaretest.common.dto.ErrorResponse;
 import com.planitsquaretest.common.utils.ResponseUtil;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -24,7 +25,9 @@ public class GlobalResponseBodyAdvice implements ResponseBodyAdvice<Object> {
                                   Class<? extends HttpMessageConverter<?>> selectedConverterType,
                                   ServerHttpRequest request, ServerHttpResponse response) {
 
-        if (body instanceof CommonResponse || body instanceof ResponseEntity || body instanceof String) {
+        if (body instanceof CommonResponse ||
+            body instanceof ResponseEntity ||
+            body instanceof ErrorResponse) {
             return body;
         }
 
