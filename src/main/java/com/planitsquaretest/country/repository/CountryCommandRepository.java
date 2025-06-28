@@ -5,6 +5,7 @@ import com.planitsquaretest.public_.tables.records.CountryRecord;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 import static com.planitsquaretest.public_.tables.Country.COUNTRY;
 
 @Repository
+@Transactional
 @RequiredArgsConstructor
 public class CountryCommandRepository {
 
