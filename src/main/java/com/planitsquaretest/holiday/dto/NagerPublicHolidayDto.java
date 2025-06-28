@@ -12,7 +12,7 @@ public record NagerPublicHolidayDto(
         String countryCode,
         boolean global,
         List<String> counties,
-        Integer launchYear,
+        String launchYear,
         List<HolidayType> types
 ) {
 }
