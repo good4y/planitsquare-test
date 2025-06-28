@@ -1,11 +1,14 @@
 spring:
   application:
     name: planitSquare-test
+
   jackson:
     time-zone: Asia/Seoul
+
   h2:
     console:
       enabled: true
+
   datasource:
     url: jdbc:h2:mem:testdb;
     driver-class-name: org.h2.Driver
@@ -16,7 +19,6 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: validate
-
 
 springdoc:
   api-docs:
