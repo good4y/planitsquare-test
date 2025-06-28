@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class HolidayTypeInit implements ApplicationRunner {
+public class HolidayTypeInitRunner implements ApplicationRunner {
 
     private final HolidayTypeEntityRepository holidayTypeEntityRepository;
 
