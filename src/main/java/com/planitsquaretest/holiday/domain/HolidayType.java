@@ -1,5 +1,7 @@
 package com.planitsquaretest.holiday.domain;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
 @Getter
@@ -16,5 +18,16 @@ public enum HolidayType {
 
     HolidayType(String description) {
         this.description = description;
+    }
+
+    @JsonCreator
+    public static HolidayType from(String value) {
+        if (value == null) return null;
+        return HolidayType.valueOf(value.toUpperCase());
+    }
+
+    @JsonValue
+    public String toValue() {
+        return this.name();
     }
 }
