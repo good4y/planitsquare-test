@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
@@ -25,6 +26,7 @@ public class CountryApiService {
                 .uri(uriBuilder -> uriBuilder
                         .pathSegment("AvailableCountries")
                         .build())
+                .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .onStatus(
                         HttpStatusCode::is4xxClientError,
