@@ -1,10 +1,7 @@
 package com.planitsquaretest.holiday.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
@@ -13,10 +10,12 @@ public class HolidayTypeMap {
     @EmbeddedId
     private HolidayTypeMapId id;
 
+    @Setter
     @MapsId("holidayId")
     @ManyToOne(fetch = FetchType.LAZY)
     private Holiday holiday;
 
+    @Setter
     @MapsId("holidayTypeId")
     @ManyToOne(fetch = FetchType.LAZY)
     private HolidayTypeEntity holidayType;

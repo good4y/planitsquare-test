@@ -3,10 +3,7 @@ package com.planitsquaretest.holiday.domain;
 import com.planitsquaretest.common.domain.BaseEntity;
 import com.planitsquaretest.country.domain.Country;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,6 +18,7 @@ public class Holiday extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     private Country country;
 
@@ -56,5 +54,13 @@ public class Holiday extends BaseEntity {
     public void addHolidayTypeMap(HolidayTypeMap holidayTypeMap) {
         this.holidayTypes.add(holidayTypeMap);
         holidayTypeMap.setHoliday(this);
+    }
+
+    public void addListDetails(List<HolidayDetail> holidayDetails) {
+        this.details.addAll(holidayDetails);
+    }
+
+    public void addListHolidayTypeMap(List<HolidayTypeMap> holidayTypeMaps) {
+        this.holidayTypes.addAll(holidayTypeMaps);
     }
 }

@@ -3,6 +3,7 @@ package com.planitsquaretest.holiday.domain;
 import com.planitsquaretest.common.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,4 +26,10 @@ public class HolidayTypeEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "holidayType")
     private List<HolidayTypeMap> typeMaps = new ArrayList<>();
+
+    @Builder
+    private HolidayTypeEntity(String description, HolidayType type) {
+        this.description = description;
+        this.type = type;
+    }
 }
