@@ -7,6 +7,8 @@ import com.planitsquaretest.country.repository.CountryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CountryQueryService {
@@ -18,5 +20,9 @@ public class CountryQueryService {
                 () -> NotFoundException.notFound("Country with code " + code + " not found"));
 
         return new CountryDto(country);
+    }
+
+    public List<String> findAllCountryCodes() {
+        return countryRepository.findAllCountryCodes();
     }
 }
