@@ -6,43 +6,9 @@ servers:
   - url: 'http://localhost:8080/api/v1'
 paths:
   /health:
-    get:
-      summary: 헬스 체크
-      operationId: healthCheck
-      tags:
-        - Health
-      responses:
-        '200':
-          description: 정상 응답
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HealthResponse'
-        '500':
-          description: 에러
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+    $ref: ./paths/health.yaml#/health
   /country/csv:
-    post:
-      summary: 국가 정보 csv를 이용한 등록
-      operationId: countryCsvRegister
-      tags:
-        - Country
-      responses:
-        '200':
-          description: 정상 응답
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CountryCsvRegisterResponse'
-        '500':
-          description: 에러
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+    $ref: ./paths/country.yaml#/country/csv
   /holiday/search:
     get:
       summary: 연도별·국가별 공휴일 조회
@@ -99,6 +65,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+  /holiday/refresh:
+    put:
+      summary: 연도·국가별 휴일 데이터 재동기화(Upsert)
+      operationId: holidayRefresh
+      tags:
+        - Holiday
+      parameters:
+        - name: year
+          in: query
+          schema:
+            type: integer
+        - name: countryCode
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 성공
+  /holiday:
+    delete:
+      summary: 연도·국가별 공휴일 삭제
+      operationId: holidayDelete
+      tags:
+        - Holiday
+      parameters:
+        - name: year
+          in: query
+          schema:
+            type: integer
+        - name: countryCode
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 성공
 components:
   schemas:
     ErrorResponse:

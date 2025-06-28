@@ -1,5 +1,5 @@
-holiday:
-  search:
+paths:
+  /holiday/search:
     get:
       summary: 연도별·국가별 공휴일 조회
       operationId: holidaySearch
@@ -8,14 +8,16 @@ holiday:
       parameters:
         - name: year
           in: query
-          description: "조회할 연도 (예: 2025)"
+          description:
+            '조회할 연도 (예: 2025)'
           required: false
           schema:
             type: integer
             format: int32
         - name: countryCode
           in: query
-          description: "국가 코드 (예: KR)"
+          description:
+            '국가 코드 (예: KR)'
           required: false
           schema:
             type: string
@@ -55,3 +57,41 @@ holiday:
             application/json:
               schema:
                 $ref: '../components/common/ErrorResponse.yaml'
+
+  /holiday/refresh:
+    put:
+      summary: 연도·국가별 휴일 데이터 재동기화(Upsert)
+      operationId: holidayRefresh
+      tags:
+        - Holiday
+      parameters:
+        - name: year
+          in: query
+          schema:
+            type: integer
+        - name: countryCode
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 성공
+
+  /holiday:
+    delete:
+      summary: 연도·국가별 공휴일 삭제
+      operationId: holidayDelete
+      tags:
+        - Holiday
+      parameters:
+        - name: year
+          in: query
+          schema:
+            type: integer
+        - name: countryCode
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 성공

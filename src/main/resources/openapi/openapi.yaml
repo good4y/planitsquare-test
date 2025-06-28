@@ -10,8 +10,8 @@ paths:
     $ref: './paths/health.yaml#/health'
   /country/csv:
     $ref: './paths/country.yaml#/country/csv'
-  /holiday/search:
-    $ref: './paths/holiday.yaml#/holiday/search'
+
+  $ref: './paths/holiday.yaml#/paths'
 
 components:
   schemas:
