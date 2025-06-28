@@ -26,6 +26,8 @@ public class Holiday extends BaseEntity {
 
     private String name;
 
+    private String localName;
+
     private LocalDate date;
 
     private boolean isGlobal;
@@ -37,16 +39,22 @@ public class Holiday extends BaseEntity {
     List<HolidayTypeMap> holidayTypes = new ArrayList<>();
 
     @Builder
-    private Holiday(Country country, LocalDate date, Long id, String name, boolean isGlobal) {
+    private Holiday(Country country, LocalDate date, Long id, String name, String localName, boolean isGlobal) {
         this.country = country;
         this.date = date;
         this.id = id;
         this.name = name;
+        this.localName = localName;
         this.isGlobal = isGlobal;
     }
 
     public void addDetail(HolidayDetail detail) {
         this.details.add(detail);
         detail.setHoliday(this);
+    }
+
+    public void addHolidayTypeMap(HolidayTypeMap holidayTypeMap) {
+        this.holidayTypes.add(holidayTypeMap);
+        holidayTypeMap.setHoliday(this);
     }
 }

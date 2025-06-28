@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum HolidayDetailType {
-    COUNTY, LAUNCH_YEAR, LOCAL_NAME;
+    COUNTY, LAUNCH_YEAR;
 
     @JsonCreator
     public static HolidayDetailType from(String value) {
