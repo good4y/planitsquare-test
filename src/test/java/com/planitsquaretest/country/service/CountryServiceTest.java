@@ -54,11 +54,11 @@ class CountryServiceTest {
             assertThat(captured).hasSize(1);
 
             Country country = captured.get(0);
-            CountryDetail countryDetail = country.getCountryDetailList().get(0);
+            CountryDetail countryDetail = country.getCountryDetails().get(0);
 
             assertThat(country.getCode()).isEqualTo(koreaCountryCode);
             assertThat(country.getName()).isEqualTo(koreaCountryName);
-            assertThat(country.getCountryDetailList()).hasSize(1);
+            assertThat(country.getCountryDetails()).hasSize(1);
             assertThat(countryDetail.getContent()).isEqualTo(calendarId);
             assertThat(countryDetail.getType()).isEqualTo(CountryDetailType.GOOGLE_CALENDAR_ID);
         }

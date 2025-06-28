@@ -60,9 +60,10 @@ sourceSets {
 
 flyway {
     configurations = ['flywayMigration']
-    url = 'jdbc:h2:mem:testdb'
+    url = 'jdbc:h2:~/testdb'
     user = 'sa'
     password = ''
+    cleanDisabled = false
 }
 
 jooq {
