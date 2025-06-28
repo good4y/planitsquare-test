@@ -1,0 +1,26 @@
+type: object
+properties:
+  countryName:
+    type: string
+    example: "South Korea"
+  holidayDate:
+    type: string
+    format: date
+    example: "2025-01-01"
+  holidayName:
+    type: string
+    example: "New Year's Day"
+  holidayLocalName:
+    type: string
+    example: "설날"
+  countryCode:
+    type: string
+    example: "KR"
+  isGlobal:
+    type: boolean
+    example: true
+  details:
+    type: array
+    items:
+      $ref: '../holiday/holidaySearchDetailViewResponse.yaml'
+

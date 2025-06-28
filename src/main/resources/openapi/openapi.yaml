@@ -1,0 +1,25 @@
+openapi: 3.0.0
+info:
+  title: Planet Square API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api/v1
+
+paths:
+  /health:
+    $ref: './paths/health.yaml#/health'
+  /country/csv:
+    $ref: './paths/country.yaml#/country/csv'
+
+  $ref: './paths/holiday.yaml#/paths'
+
+components:
+  schemas:
+    ErrorResponse:
+      $ref: './components/common/ErrorResponse.yaml'
+    HealthResponse:
+      $ref: './components/common/HealthResponse.yaml'
+    CountryCsvRegisterResponse:
+      $ref: './components/country/CountryCsvRegisterResponse.yaml'
+    HolidayViewResponse:
+      $ref: './components/holiday/holidaySearchViewResponse.yaml'
