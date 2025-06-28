@@ -101,4 +101,17 @@ public class HolidayCommandFacade {
         holidayCommandService.saveAllHoliday(holidays);
         return CompletableFuture.completedFuture(null);
     }
+
+    public void refreshHolidayFromNager(Integer year, String countryCode) {
+        CountryDto countryDto = countryQueryService.findByCountryCode(countryCode);
+        holidayCommandService.deleteHolidayYearCountry(year, countryDto.country());
+
+        CompletableFuture<Void> future = saveAllHolidayFromNager(year.toString(), countryCode);
+        future.join();
+    }
+
+    public void deleteHoliday(Integer year, String countryCode){
+        CountryDto countryDto = countryQueryService.findByCountryCode(countryCode);
+        holidayCommandService.deleteHolidayYearCountry(year, countryDto.country());
+    }
 }
