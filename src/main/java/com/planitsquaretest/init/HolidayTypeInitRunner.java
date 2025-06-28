@@ -31,5 +31,7 @@ public class HolidayTypeInitRunner implements ApplicationRunner {
 
             holidayTypeEntityRepository.save(entity);
         }
+
+        log.info("HolidayTypeInitRunner finished");
     }
 }
