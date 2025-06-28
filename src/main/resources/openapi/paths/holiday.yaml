@@ -1,0 +1,57 @@
+holiday:
+  search:
+    get:
+      summary: 연도별·국가별 공휴일 조회
+      operationId: holidaySearch
+      tags:
+        - Holiday
+      parameters:
+        - name: year
+          in: query
+          description: "조회할 연도 (예: 2025)"
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: countryCode
+          in: query
+          description: "국가 코드 (예: KR)"
+          required: false
+          schema:
+            type: string
+            example: KR
+        - name: offset
+          in: query
+          description: 결과 페이징 offset
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: limit
+          in: query
+          description: 결과 페이징 limit
+          required: false
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: 공휴일 조회 성공
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '../components/holiday/holidaySearchViewResponse.yaml'
+        '400':
+          description: 잘못된 요청
+          content:
+            application/json:
+              schema:
+                $ref: '../components/common/ErrorResponse.yaml'
+        '500':
+          description: 서버 에러
+          content:
+            application/json:
+              schema:
+                $ref: '../components/common/ErrorResponse.yaml'

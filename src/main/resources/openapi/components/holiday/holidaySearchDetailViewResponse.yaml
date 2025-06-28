@@ -1,0 +1,8 @@
+type: object
+properties:
+  detailType:
+    type: string
+    example: "COUNTY"
+  value:
+    type: string
+    example: "KR"

@@ -9,6 +9,7 @@ import com.planitsquaretest.holiday.service.HolidayApiService;
 import com.planitsquaretest.holiday.service.HolidayCommandService;
 import com.planitsquaretest.holiday.service.HolidayQueryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,7 +30,8 @@ public class HolidayCommandFacade {
     private final CountryQueryService countryQueryService;
     private final HolidayQueryService holidayQueryService;
 
-    public void saveAllHolidayFromNager(String year, String countryCode) {
+    @Async("nagerApiThreadExecutor")
+    public CompletableFuture<Void> saveAllHolidayFromNager(String year, String countryCode) {
         CountryDto countryDto = countryQueryService.findByCountryCode(countryCode);
         Country country = countryDto.country();
 
@@ -96,5 +99,6 @@ public class HolidayCommandFacade {
         }
 
         holidayCommandService.saveAllHoliday(holidays);
+        return CompletableFuture.completedFuture(null);
     }
 }

@@ -10,6 +10,8 @@ paths:
     $ref: './paths/health.yaml#/health'
   /country/csv:
     $ref: './paths/country.yaml#/country/csv'
+  /holiday/search:
+    $ref: './paths/holiday.yaml#/holiday/search'
 
 components:
   schemas:
@@ -19,3 +21,5 @@ components:
       $ref: './components/common/HealthResponse.yaml'
     CountryCsvRegisterResponse:
       $ref: './components/country/CountryCsvRegisterResponse.yaml'
+    HolidayViewResponse:
+      $ref: './components/holiday/holidaySearchViewResponse.yaml'

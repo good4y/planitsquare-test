@@ -13,7 +13,7 @@ public class JooqConfig {
     public org.jooq.Configuration configuration(DataSource dataSource){
         DefaultConfiguration configuration = new DefaultConfiguration();
         configuration.set(dataSource);
-        configuration.set(SQLDialect.MYSQL);
+        configuration.set(SQLDialect.H2);
 
         configuration.settings()
                 .withMapRecordComponentParameterNames(true);
