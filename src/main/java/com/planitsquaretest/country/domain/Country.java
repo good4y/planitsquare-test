@@ -1,6 +1,7 @@
 package com.planitsquaretest.country.domain;
 
 import com.planitsquaretest.common.domain.BaseEntity;
+import com.planitsquaretest.holiday.domain.Holiday;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -24,8 +25,11 @@ public class Country extends BaseEntity {
     @Column(unique = true)
     private String code;
 
-    @OneToMany(mappedBy = "country", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private final List<CountryDetail> countryDetailList = new ArrayList<>();
+    @OneToMany(mappedBy = "country", cascade = CascadeType.PERSIST)
+    private List<Holiday> holidays = new ArrayList<>();
+
+    @OneToMany(mappedBy = "country", cascade = CascadeType.PERSIST)
+    private final List<CountryDetail> countryDetails = new ArrayList<>();
 
     @Builder
     private Country(String code, String name) {
@@ -34,7 +38,13 @@ public class Country extends BaseEntity {
     }
 
     public void addCountryDetail(CountryDetail detail) {
-        this.countryDetailList.add(detail);
+        this.countryDetails.add(detail);
         detail.setCountry(this);
     }
+
+    public void addHoliday(Holiday holiday) {
+        this.holidays.add(holiday);
+        holiday.setCountry(this);
+    }
+
 }

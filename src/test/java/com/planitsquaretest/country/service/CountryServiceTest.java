@@ -4,6 +4,7 @@ import com.planitsquaretest.country.domain.Country;
 import com.planitsquaretest.country.domain.CountryDetail;
 import com.planitsquaretest.country.domain.CountryDetailType;
 import com.planitsquaretest.country.dto.GoogleCalendarCsvDto;
+import com.planitsquaretest.country.repository.CountryCommandRepository;
 import com.planitsquaretest.country.repository.CountryRepository;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,9 @@ class CountryServiceTest {
 
     @Mock
     private CountryRepository countryRepository;
+
+    @Mock
+    private CountryCommandRepository countryCommandRepository;
 
     @Nested
     class saveAllFromCsv {
@@ -53,14 +57,34 @@ class CountryServiceTest {
             List<Country> captured = captor.getValue();
             assertThat(captured).hasSize(1);
 
-            Country country = captured.get(0);
-            CountryDetail countryDetail = country.getCountryDetailList().get(0);
+            Country country = captured.getFirst();
+            CountryDetail countryDetail = country.getCountryDetails().getFirst();
 
             assertThat(country.getCode()).isEqualTo(koreaCountryCode);
             assertThat(country.getName()).isEqualTo(koreaCountryName);
-            assertThat(country.getCountryDetailList()).hasSize(1);
+            assertThat(country.getCountryDetails()).hasSize(1);
             assertThat(countryDetail.getContent()).isEqualTo(calendarId);
             assertThat(countryDetail.getType()).isEqualTo(CountryDetailType.GOOGLE_CALENDAR_ID);
         }
+    }
+
+    @Nested
+    class saveAllCountries {
+
+        @Test
+        void 국가_정보를_저장한다() {
+            // given
+            List<Country> countries = List.of(
+                    Country.builder().name("korea").code("KR").build(),
+                    Country.builder().name("United States").code("US").build()
+            );
+
+            // when
+            countryService.saveAllCountries(countries);
+
+            // then
+            verify(countryCommandRepository).batchInsertCountries(countries);
+        }
+
     }
 }

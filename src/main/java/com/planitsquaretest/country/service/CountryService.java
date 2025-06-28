@@ -4,18 +4,22 @@ import com.planitsquaretest.country.domain.Country;
 import com.planitsquaretest.country.domain.CountryDetail;
 import com.planitsquaretest.country.domain.CountryDetailType;
 import com.planitsquaretest.country.dto.GoogleCalendarCsvDto;
+import com.planitsquaretest.country.repository.CountryCommandRepository;
 import com.planitsquaretest.country.repository.CountryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CountryService {
 
     private final CountryRepository countryRepository;
+    private final CountryCommandRepository countryCommandRepository;
 
     public void saveAllFromCsv(List<GoogleCalendarCsvDto> dtos) {
         CountryDetailType type = CountryDetailType.GOOGLE_CALENDAR_ID;
@@ -38,5 +42,9 @@ public class CountryService {
         });
 
         countryRepository.saveAll(countries);
+    }
+
+    public void saveAllCountries(List<Country> countries) {
+        countryCommandRepository.batchInsertCountries(countries);
     }
 }

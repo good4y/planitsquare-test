@@ -39,9 +39,7 @@ dependencies {
     implementation 'com.opencsv:opencsv:5.11.2'
 
     jooqGenerator 'com.h2database:h2:2.3.232'
-    jooqGenerator 'org.jooq:jooq:3.19.1'
     jooqGenerator 'org.jooq:jooq-meta:3.19.1'
-    jooqGenerator 'org.jooq:jooq-codegen:3.19.1'
 
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
@@ -60,12 +58,15 @@ sourceSets {
 
 flyway {
     configurations = ['flywayMigration']
-    url = 'jdbc:h2:~/testdb;'
+    url = 'jdbc:h2:~/testdb'
     user = 'sa'
     password = ''
+    cleanDisabled = false
 }
 
 jooq {
+    version = '3.19.1'
+
     configurations {
         main {
             generationTool {
