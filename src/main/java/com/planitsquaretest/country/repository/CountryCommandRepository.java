@@ -25,13 +25,15 @@ public class CountryCommandRepository {
     }
 
     private List<CountryRecord> toCountryRecords(List<Country> countries) {
+        LocalDateTime now = LocalDateTime.now();
+
         return countries.stream()
                 .map(country -> {
                     CountryRecord record = dsl.newRecord(COUNTRY);
                     record.setName(country.getName());
                     record.setCode(country.getCode());
-                    record.setCreatedAt(LocalDateTime.now());
-                    record.setModifiedAt(LocalDateTime.now());
+                    record.setCreatedAt(now);
+                    record.setModifiedAt(now);
                     return record;
                 })
                 .collect(Collectors.toList());
