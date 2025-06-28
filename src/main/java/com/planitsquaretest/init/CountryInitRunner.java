@@ -20,5 +20,8 @@ public class CountryInitRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         log.info("CountryInitRunner started");
         countryCommandFacade.saveAllCountryFromNager();
+
+        log.info("CountryInitRunner finished");
+
     }
 }

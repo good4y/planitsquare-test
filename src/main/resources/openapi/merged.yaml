@@ -43,6 +43,62 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+  /holiday/search:
+    get:
+      summary: 연도별·국가별 공휴일 조회
+      operationId: holidaySearch
+      tags:
+        - Holiday
+      parameters:
+        - name: year
+          in: query
+          description: '조회할 연도 (예: 2025)'
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: countryCode
+          in: query
+          description: '국가 코드 (예: KR)'
+          required: false
+          schema:
+            type: string
+            example: KR
+        - name: offset
+          in: query
+          description: 결과 페이징 offset
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - name: limit
+          in: query
+          description: 결과 페이징 limit
+          required: false
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: 공휴일 조회 성공
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HolidayViewResponse'
+        '400':
+          description: 잘못된 요청
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: 서버 에러
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
     ErrorResponse:
@@ -69,3 +125,36 @@ components:
           type: integer
         failed:
           type: integer
+    HolidayViewResponse:
+      type: object
+      properties:
+        countryName:
+          type: string
+          example: South Korea
+        holidayDate:
+          type: string
+          format: date
+          example: '2025-01-01'
+        holidayName:
+          type: string
+          example: New Year's Day
+        holidayLocalName:
+          type: string
+          example: 설날
+        countryCode:
+          type: string
+          example: KR
+        isGlobal:
+          type: boolean
+          example: true
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              detailType:
+                type: string
+                example: COUNTY
+              value:
+                type: string
+                example: KR

@@ -1,7 +1,7 @@
 package com.planitsquaretest.country.controller;
 
 import com.planitsquaretest.api.CountryApi;
-import com.planitsquaretest.country.facade.CountryFacade;
+import com.planitsquaretest.country.facade.CountryCommandFacade;
 import com.planitsquaretest.model.CountryCsvRegisterResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class CountryController implements CountryApi {
 
-    private final CountryFacade countryFacade;
+    private final CountryCommandFacade countryCommandFacade;
 
     @Override
     public CountryCsvRegisterResponse countryCsvRegister() {
-        return countryFacade.saveAllCountryFromCsv();
+        return countryCommandFacade.saveAllCountryFromCsv();
     }
 }
